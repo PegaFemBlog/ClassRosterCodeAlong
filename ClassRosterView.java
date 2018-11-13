@@ -5,6 +5,9 @@
  */
 package com.mycompany.classroster.ui;
 
+import com.mycompany.classroster.dto.Student;
+import java.util.List;
+
 /**
  *
  * @author bacag
@@ -15,7 +18,13 @@ public class ClassRosterView {
                     gives our program functionality
     
 **************************************************************************************************************************/    
-    UserIO io = new UserIOConsoleImpl();
+        //declaration
+        private final UserIO io;
+    
+        //now must implement a constructor for the decalaration
+        public ClassRosterView(UserIO io) {
+            this.io = io;
+        }
 
                 public int printMenuAndGetSelection() {
 	            io.print("Main Menu");
@@ -27,8 +36,78 @@ public class ClassRosterView {
 	            
 	           return io.readInt("Please select from the choices.", 1, 5);    
         }
+           //This method will allow us to get the information we need from the user to create a 
+                //new student object
+                
+            public Student getNewStudentInfo() {
+	    String studentId = io.readString("Please enter Student ID");
+	    String firstName = io.readString("Please enter First Name");
+	    String lastName = io.readString("Please enter Last Name");
+	    String cohort = io.readString("Please enter Cohort");
+	    Student currentStudent = new Student(studentId);
+	    currentStudent.setFirstName(firstName);
+	    currentStudent.setLastName(lastName);
+	    currentStudent.setCohort(cohort);
+	    return currentStudent;
+	}
+            //This method displays a banner to the UI indicating that the next interaction
+            // will be for creating a student
+            public void displayCreateStudentBanner() {
+                io.print("===Create Student===");
+            }
+            //This method displays the message that the new student was successfully created
+            public void displayCreateSuccessBanner() {
+                io.readString("Student successfully created. Please hit enter to continue.");
+            }
+            public void displayStudentList(List<Student> studentList) {
+                for (Student currentStudent : studentList) {
+                    io.print(currentStudent.getStudentId()+" : "+currentStudent.getFirstName()+" "+currentStudent.getLastName());
+                 
+                }
+                io.readString("Please hit enter to continue.");
+            }
+            public void displayDisplayAllBanner() {
+                io.print("=== Display All Students ==="); 
+            }
+            public void displayDisplayStudentBanner () {
+                io.print("=== Display Student ===");
+            }
+            public String getStudentIdChoice() {
+                return io.readString("Please enter the student ID.");
+            }
+            public void displayStudent(Student student) {
+                if (student != null) {
+                    io.print(student.getStudentId());
+                    io.print(student.getFirstName() + " "+ (student.getLastName()));
+                    io.print(student.getCohort());
+                    io.print("");
+                } else {
+                    io.print("No such student.");
+                }
+                io.readString("Please hit enter to continue.");
+            }
+            //since this is the view - the view will NOT be
+            //removing or adding a student.... it simply displays
+            //what the user seas as they work with our data/program
+            public void displayRemoveStudentBanner() {
+                io.print("=== Remove Student ===");
+            }
+            public void displayRemoveSuccessBanner() {
+                io.readString("Student successfully moved from roster. Please hit enter to continue.");
+            }
+            public void displayExitBanner() {
+                io.print("Good Bye!!!");
+            }
+            public void displayUnknownCommandBanner() {
+                io.print("Unknown Command!!!"); 
+            }
+            public void displayErrorMessage(String errorMsg) {
+                io.print("=== ERROR ===");
+                io.print(errorMsg); 
+            }
     }
 
             
-
+//io.readString - will wait for the next string and will give you that stop time 
+//
 //Page #6 of the assignment io.print(student.getStudent() + " ");

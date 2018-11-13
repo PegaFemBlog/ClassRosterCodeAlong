@@ -17,6 +17,18 @@ public class Student {
     private String studentId;
     private String cohort;
 
+    public Student(String studentID) {
+        this.studentId = studentID;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+    
     public String getFirstName() {
         return firstName;
     }
@@ -33,14 +45,6 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public String getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
-    }
-
     public String getCohort() {
         return cohort;
     }
@@ -48,7 +52,5 @@ public class Student {
     public void setCohort(String cohort) {
         this.cohort = cohort;
     }
-    
-    
     
 }
